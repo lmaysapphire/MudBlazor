@@ -25,10 +25,9 @@ namespace MudBlazor.UnitTests.Components
         {
             var comp = Context.RenderComponent<SimplePickerTest>();
             var picker = comp.FindComponent<MudPicker<DateTime?>>();
-            
 
-            await comp.InvokeAsync(() => picker.Instance.SelectAsync());
-            await comp.InvokeAsync(() => picker.Instance.SelectRangeAsync(0, 0));
+            await comp.InvokeAsync(async () => await picker.Instance.SelectAsync());
+            await comp.InvokeAsync(async () => await picker.Instance.SelectRangeAsync(0, 0));
 #pragma warning disable BL0005
             await comp.InvokeAsync(() => picker.Instance.Disabled = true);
             await comp.InvokeAsync(() => picker.Instance.HandleKeyDown(new KeyboardEventArgs()));
@@ -40,7 +39,7 @@ namespace MudBlazor.UnitTests.Components
             var value = new DisplayNameLabelClass();
 
             var comp = Context.RenderComponent<MudPicker<DateTime?>>(x => x.Add(f => f.For, () => value.Date));
-            comp.Instance.Label.Should().Be("Date DisplayName"); //label should be set by the attribute
+            comp.Instance.Label.Should().Be("Date LabelAttribute"); //label should be set by the attribute
 
             var comp2 = Context.RenderComponent<MudPicker<DateTime?>>(x => x.Add(f => f.For, () => value.Date).Add(l => l.Label, "Label Parameter"));
             comp2.Instance.Label.Should().Be("Label Parameter"); //existing label should remain

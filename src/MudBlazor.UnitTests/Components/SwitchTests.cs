@@ -17,7 +17,6 @@ namespace MudBlazor.UnitTests.Components
         public async Task SwitchTest_KeyboardNavigation()
         {
             var comp = Context.RenderComponent<MudSwitch<bool>>();
-            //Console.WriteLine(comp.Markup);
 
             await comp.InvokeAsync(() => comp.Instance.HandleKeyDown(new KeyboardEventArgs() { Key = "Enter", Type = "keydown", }));
             comp.WaitForAssertion(() => comp.Instance.Checked.Should().Be(true));
@@ -85,7 +84,6 @@ namespace MudBlazor.UnitTests.Components
         public void SwitchLabelPositionTest()
         {
             var comp = Context.RenderComponent<SwitchWithLabelExample>();
-            //Console.WriteLine(comp.Markup);
             var switches = comp.FindAll("label.mud-switch");
 
             switches[0].ClassList.Should().Contain("mud-ltr"); // 1st switch: (default) LabelPosition.End
@@ -98,7 +96,7 @@ namespace MudBlazor.UnitTests.Components
             var value = new DisplayNameLabelClass();
 
             var comp = Context.RenderComponent<MudSwitch<bool>>(x => x.Add(f => f.For, () => value.Boolean));
-            comp.Instance.Label.Should().Be("Boolean DisplayName"); //label should be set by the attribute
+            comp.Instance.Label.Should().Be("Boolean LabelAttribute"); //label should be set by the attribute
 
             var comp2 = Context.RenderComponent<MudSwitch<bool>>(x => x.Add(f => f.For, () => value.Boolean).Add(l => l.Label, "Label Parameter"));
             comp2.Instance.Label.Should().Be("Label Parameter"); //existing label should remain

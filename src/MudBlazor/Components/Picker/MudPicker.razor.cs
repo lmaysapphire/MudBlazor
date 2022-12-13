@@ -334,7 +334,6 @@ namespace MudBlazor
                 if (callback)
                     await StringValueChanged(_text);
                 await TextChanged.InvokeAsync(_text);
-                FieldChanged(_text);
             }
         }
 
@@ -435,7 +434,7 @@ namespace MudBlazor
             }
 
             if (Label == null && For != null)
-                Label = For.GetDisplayNameString();
+                Label = For.GetLabelString();
         }
 
         private async Task EnsureKeyInterceptor()
